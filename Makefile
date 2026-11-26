@@ -27,9 +27,10 @@ es: $(BUILD)/$(NAME)_ES.pdf ## Build the Spanish PDF only
 watch: ## Rebuild the English PDF on every save (LANG_=ES for Spanish)
 	cd $(SRC) && $(LATEXMK) $(FLAGS) -pvc $(NAME)_$(or $(LANG_),EN).tex
 
+# TeX wraps log lines at 79 characters, so the log is joined before searching
 check: all ## Fail if either resume is longer than one page
 	@for log in $(PDFS:.pdf=.log); do \
-	  grep -q 'Output written on .*(1 page' $$log || { echo "$$log: the resume is longer than one page"; exit 1; }; \
+	  tr -d '\n' < $$log | grep -q 'Output written on .*(1 page' || { echo "$$log: the resume is longer than one page"; exit 1; }; \
 	done; echo "OK: every resume fits on one page"
 
 tectonic: ## Build both PDFs with Tectonic instead of TeX Live

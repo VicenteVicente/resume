@@ -35,7 +35,8 @@ jobs:
       - name: Check that each resume is one page
         run: |
           for log in build/Vicente_Calisto_Resume_EN.log build/Vicente_Calisto_Resume_ES.log; do
-            if ! grep -q 'Output written on .*(1 page' "$log"; then
+            # TeX wraps log lines at 79 characters, so join them before searching
+            if ! tr -d '\n' < "$log" | grep -q 'Output written on .*(1 page'; then
               echo "::error file=src/resume.tex::${log%.log}.pdf is longer than one page"
               exit 1
             fi
