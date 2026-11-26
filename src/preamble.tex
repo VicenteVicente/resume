@@ -1,0 +1,134 @@
+% !TEX root = Vicente_Calisto_Resume_EN.tex
+%-------------------------------------------------------------------------------
+% Layout and macros for the resume. Content lives in resume.tex.
+%
+% Expects \resumelang to be defined as `en` or `es` before this file is input
+% (the entry points Vicente_Calisto_Resume_EN.tex / _ES.tex do this).
+%
+% Based on Jake Gutierrez's resume template, itself based on
+% https://github.com/sb2nov/resume. Both are MIT-licensed; their notice:
+%
+%   Copyright (c) Jake Gutierrez, Sourabh Bajaj
+%   Permission is hereby granted, free of charge, to any person obtaining a copy
+%   of this software and associated documentation files (the "Software"), to deal
+%   in the Software without restriction, including without limitation the rights
+%   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%   copies of the Software, and to permit persons to whom the Software is
+%   furnished to do so, subject to the following conditions: The above copyright
+%   notice and this permission notice shall be included in all copies or
+%   substantial portions of the Software.
+%   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+%   SOFTWARE.
+%-------------------------------------------------------------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+%----------LANGUAGE----------
+\providecommand{\resumelang}{en}
+\newif\ifspanish
+\makeatletter
+\edef\@tempa{\resumelang}\def\@tempb{es}
+\ifx\@tempa\@tempb \spanishtrue \fi
+\makeatother
+
+% \tr{English text}{Spanish text}: prints the text for the current language.
+% Every piece of prose goes through it, so both languages are edited side by side.
+\newcommand{\tr}[2]{\ifspanish#2\else#1\fi}
+
+%----------ENGINE / FONTS----------
+\usepackage{iftex}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \input{glyphtounicode}
+  \pdfgentounicode=1 % machine-readable text, for ATS parsers
+\fi
+
+\ifspanish
+  \usepackage[english,spanish,es-noshorthands,es-nolayout,es-nodecimaldot]{babel}
+\else
+  \usepackage[spanish,english]{babel}
+\fi
+
+%----------PACKAGES----------
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+
+% PDF metadata: shown in viewers' title bars and document properties, and read by ATS systems
+\hypersetup{
+  pdfauthor={Vicente Calisto},
+  pdftitle={\tr{Vicente Calisto - Resume}{Vicente Calisto - Curr\'iculum}},
+  pdfsubject={\tr{Senior Software Engineer, Database Engines (C++)}
+                 {Ingeniero de Software Senior, Motores de Bases de Datos (C++)}},
+  pdfkeywords={C++, C++14, C++17, C++20, database engines, database internals, query engine, query optimization,
+    vectorized execution, columnar database, Apache Arrow, Parquet, SQL, SPARQL, graph database,
+    vector search, HNSW, WebAssembly, Emscripten, Python, TypeScript, MillenniumDB, ColibriDB},
+  pdflang={\tr{en-US}{es-CL}},
+  pdfdisplaydoctitle=true, % viewers show the title instead of the file name
+  pdfcreator={LaTeX},
+}
+
+%----------PAGE----------
+\pagestyle{empty} % no header, footer or page number
+
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.15in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section title, its rule, and fixed space above and below (5pt each)
+\titleformat{\section}{\scshape\raggedright\large}{}{0em}{}[\color{black}\titlerule]
+\titlespacing*{\section}{0pt}{5pt}{5pt}
+
+%----------SPACING----------
+% All vertical spacing comes from these list settings; no \vspace hacks, so
+% every gap of the same kind is the same size.
+%   entries (jobs, projects): 0.1in indent, 2.5pt between entries
+%   one-line entries (papers, skills): same indent, no extra space between
+%   bullets under an entry: 1em indent, 1pt above the first one, none between
+\newcommand{\resumeSubHeadingListStart}{%
+  \begin{itemize}[leftmargin=0.1in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=2.5pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeCompactListStart}{%
+  \begin{itemize}[leftmargin=0.1in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt]}
+\newcommand{\resumeCompactListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=1em, labelsep=0.4em, topsep=1pt, partopsep=0pt, parsep=0pt, itemsep=0pt,
+                  label=\textbullet, before=\small]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+%----------MACROS----------
+\newcommand{\resumeItem}[1]{\item #1}
+
+% {Organization}{Location}{Role}{Dates}
+\newcommand{\resumeSubheading}[4]{%
+  \item \textbf{#1}\hfill{\small #2}\par
+  {\small\itshape #3\hfill #4\par}}
+
+% {Second role at the same organization}{Dates}
+\newcommand{\resumeSubSubheading}[2]{%
+  \item {\small\itshape #1\hfill #2\par}}
+
+% {Title | description}{Right-aligned text}
+\newcommand{\resumeProjectHeading}[2]{%
+  \item {\small #1\hfill #2\par}}
+
+% {DOI}{Title}{Venue}: title, then a small underlined DOI link to the paper
+\newcommand{\resumePublication}[3]{%
+  \item {\small #2 {\footnotesize\href{https://doi.org/#1}{\underline{DOI}}}\hfill #3\par}}

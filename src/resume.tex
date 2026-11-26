@@ -1,0 +1,184 @@
+% !TEX root = Vicente_Calisto_Resume_EN.tex
+%-------------------------------------------------------------------------------
+% Resume content, English and Spanish together.
+%
+% Every piece of prose is written as \tr{English}{Español}, so changing one
+% language means editing the other right next to it. Build both PDFs with
+% `make` (see README.md). Keep it to ONE page: CI fails the build otherwise.
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Vicente Calisto} \\ \vspace{3pt}
+    \small \tr{Senior Software Engineer $\cdot$ Database Engines $\cdot$ C++}
+              {Ingeniero de Software Senior $\cdot$ Motores de Bases de Datos $\cdot$ C++}
+    \\ \vspace{3pt}
+    Chile $|$
+    \href{mailto:vicente.calisto98@gmail.com}{\underline{vicente.calisto98@gmail.com}} $|$
+    \href{https://linkedin.com/in/vicente-calisto}{\underline{linkedin.com/in/vicente-calisto}} $|$
+    \href{https://github.com/VicenteVicente}{\underline{github.com/VicenteVicente}}
+\end{center}
+
+%----------EXPERIENCE----------
+\section{\tr{Experience}{Experiencia}}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {\tr{Millennium Institute for Foundational Research on Data (IMFD)}{Instituto Milenio Fundamentos de los Datos (IMFD)}}
+      {Santiago, Chile}
+      {\tr{Software Engineer, Database Engines}{Ingeniero de Software, Motores de Bases de Datos}}
+      {\tr{2022 -- present}{2022 -- presente}}
+      \resumeItemListStart
+        \resumeItem{\tr
+          {\textbf{ColibriDB (columnar SQL engine, C++):} designed and built an embedded, vectorized engine on
+           Apache Arrow that queries Parquet on local disk or remote storage over HTTP, from the SQL parser and
+           optimizer to multi-threaded, push-based execution.}
+          {\textbf{ColibriDB (motor SQL columnar, C++):} diseñé y construí un motor embedded y vectorizado sobre
+           Apache Arrow que consulta archivos Parquet en disco local o en almacenamiento remoto vía HTTP, desde el
+           parser SQL y el optimizador hasta la ejecución push-based multi-thread.}}
+        \resumeItem{\tr
+          {Compiled it to WebAssembly and shipped it as a TypeScript npm package that runs SQL in the browser,
+           streaming results as Arrow record batches.}
+          {Lo compilé a WebAssembly y lo publiqué como un paquete npm en TypeScript que ejecuta SQL en el
+           navegador y entrega los resultados como record batches de Arrow.}}
+        \resumeItem{\tr
+          {\textbf{MillenniumDB (open-source multi-model graph database, C++):} built SPARQL 1.1 end to end,
+           from the grammar to worst-case optimal join plans and operators for expressions, property paths and
+           updates. The engine serves a public Wikidata endpoint and ran 3--10$\times$ faster than
+           Virtuoso, Blazegraph, Jena and Neo4j on 1.26B triples.}
+          {\textbf{MillenniumDB (base de datos de grafos multimodelo open source, C++):} implementé SPARQL 1.1
+           completo, desde la gramática hasta planes con joins worst-case optimal y operadores de expresiones,
+           property paths y updates. Sirve un endpoint público de Wikidata y fue 3--10$\times$ más rápido que
+           Virtuoso, Blazegraph, Jena y Neo4j en 1.260M de triples.}}
+        \resumeItem{\tr
+          {Built vector search into the engine: HNSW and LSH indexes with online updates, SIMD distance kernels, and
+           similarity-ordered iterators that plug into the join. Published the hybrid graph + vector algorithms at
+           ISWC 2025: up to 50$\times$ faster than evaluate-then-rank on queries with many results.}
+          {Incorporé búsqueda vectorial al motor: índices HNSW y LSH con actualizaciones en línea, kernels de
+           distancia SIMD e iteradores ordenados por similitud que se integran al join. Publiqué los algoritmos
+           híbridos grafo + vector en ISWC 2025: hasta 50$\times$ más rápidos que evaluar y luego ordenar en
+           consultas con muchos resultados.}}
+        \resumeItem{\tr
+          {Built the full-text index, tensor storage for embeddings, an async Boost.Asio/Beast server with a
+           chunked binary protocol over TCP and WebSocket, and the official Python (PyPI) and JavaScript (npm) drivers.}
+          {Construí el full-text index, un almacén de tensores para embeddings, un servidor asíncrono
+           Boost.Asio/Beast con protocolo binario vía TCP/WebSocket y los drivers oficiales de Python y JavaScript
+           (PyPI, npm).}}
+        \resumeItem{\tr
+          {Mentored and supervised interns: onboarding, project scoping, and code reviews through to merge.}
+          {Guié y supervisé practicantes: onboarding, alcance de sus proyectos y code reviews hasta el merge.}}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Pontificia Universidad Católica de Chile}
+      {Santiago, Chile}
+      {\tr{Instructor, Data Management for Public Policy}
+          {Profesor, Gestión de Datos para Políticas Públicas}}
+      {\tr{2024 -- present}{2024 -- presente}}
+      \resumeItemListStart
+        \resumeItem{\tr
+          {Designed the course and teach it (relational modeling, SQL, R) to cohorts of 50+ students; 200+ to date.}
+          {Diseñé el curso y lo dicto (modelo relacional, SQL, R) a cursos de más de 50 estudiantes; más de 200
+           a la fecha.}}
+      \resumeItemListEnd
+    \resumeSubSubheading
+      {\tr{Lecturer, Database Systems (IIC2413)}
+          {Profesor, Bases de Datos (IIC2413)}}
+      {2023}
+      \resumeItemListStart
+        \resumeItem{\tr
+          {Taught relational algebra, SQL, indexing and NoSQL databases to 100+ undergraduates.}
+          {Enseñé álgebra relacional, SQL, índices y bases de datos NoSQL a más de 100 estudiantes de pregrado.}}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {coreDevX}{Santiago, Chile}
+      {\tr{Software Engineer Intern}
+          {Práctica en Ingeniería de Software}}
+      {2021}
+      \resumeItemListStart
+        \resumeItem{\tr
+          {Built a Node.js dependency-analysis tool for a large C\#, Java and PL/SQL codebase: it mapped cross-file
+           dependencies into an ArangoDB graph, so teams could see which files they shared and coordinate changes.}
+          {Construí en Node.js una herramienta de análisis de dependencias para un código extenso en C\#, Java y
+           PL/SQL, que llevaba las dependencias entre archivos a un grafo en ArangoDB para coordinar cambios.}}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%----------OPEN SOURCE----------
+\section{\tr{Open Source}{Código Abierto}}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/REmatchChile/REmatch}{REmatch}} $|$
+           \emph{\tr{Regex engine that enumerates all matches}{motor de expresiones regulares que enumera todas las coincidencias}}}
+          {2018 -- \tr{present}{presente}}
+          \resumeItemListStart
+            \resumeItem{\tr
+              {Core C++ contributor; owned the build (CMake, Python wheels with pybind11, WebAssembly) and built
+               REmatch.js and the \href{https://rematch.cl}{\underline{rematch.cl}} website.}
+              {Contribuí al motor en C++; me encargué del build (CMake, wheels de Python con pybind11,
+               WebAssembly) y desarrollé REmatch.js y el sitio \href{https://rematch.cl}{\underline{rematch.cl}}.}}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/CORE-cer/CORE}{CORE+}} $|$
+           \emph{\tr{Complex event recognition engine}{motor de reconocimiento de eventos complejos}}}
+          {2025 -- 2026}
+          \resumeItemListStart
+            \resumeItem{\tr
+              {Built the web client and the WebSocket layer that streams live query results.}
+              {Construí el cliente web y la capa WebSocket que transmite en vivo los resultados de las consultas.}}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%----------PUBLICATIONS----------
+\section{\tr{Publications}{Publicaciones}}
+    \resumeCompactListStart
+      \resumePublication
+        {10.1007/978-3-032-09527-5_19}
+        {Graph Querying or Similarity Search? Both!}{ISWC 2025}
+      \resumePublication
+        {10.1145/3722212.3725090}
+        {CORE+: A Complex Event Recognition Engine in C++}{SIGMOD 2025}
+      \resumePublication
+        {10.1145/3626246.3654757}
+        {MillenniumDB: A Multi-modal, Multi-model Graph Database}{SIGMOD 2024}
+      \resumePublication
+        {10.1145/3626246.3654746}
+        {Demonstrating REmatch: A Novel RegEx Engine for Finding all Matches}{SIGMOD 2024}
+      \resumePublication
+        {10.1145/3661304.3661899}
+        {TelarKG: a Knowledge Graph of Chile's Constitutional Process}{GRADES-NDA 2024}
+    \resumeCompactListEnd
+
+%----------EDUCATION----------
+\section{\tr{Education}{Educación}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Pontificia Universidad Católica de Chile}{Santiago, Chile}
+      {\tr{BSc in Computer Science, Minor in Data Science. Thesis: Compiling SPARQL in MillenniumDB}
+          {Lic. en Ciencia de la Computación, Minor en Ciencia de Datos. Tesis: SPARQL en MillenniumDB}}
+      {2017 -- 2022}
+  \resumeSubHeadingListEnd
+
+%----------SKILLS----------
+\section{\tr{Technical Skills}{Habilidades Técnicas}}
+ \resumeCompactListStart
+    \small{\item{
+     \textbf{\tr{Query engines}{Motores de consulta}}{: \tr
+       {parsing (ANTLR4), binding, planning, query optimization, vectorized and parallel execution}
+       {parsing (ANTLR4), binding, planificación, optimización, ejecución vectorizada y paralela}} \\
+     \textbf{\tr{Storage \& data}{Almacenamiento}}{: \tr
+       {Apache Arrow, Parquet, buffer manager, B+ trees, vector indexes, RDF, property graphs}
+       {Apache Arrow, Parquet, buffer manager, B+ trees, índices vectoriales, RDF, property graphs}} \\
+     \textbf{\tr{Programming languages}{Lenguajes de programación}}{: C++, Python, TypeScript, JavaScript (React, Node.js), R} \\
+     \textbf{\tr{Query languages}{Lenguajes de consulta}}{: SQL, SPARQL, Cypher, GQL} \\
+     \textbf{\tr{Tooling}{Herramientas}}{: CMake, Emscripten, WebAssembly, pybind11, Boost, GoogleTest,
+       sanitizers, perf, Valgrind, gdb, Git, Docker, GitHub~Actions, Linux} \\
+     \textbf{\tr{Spoken languages}{Idiomas}}{: \tr{Spanish (native), English (advanced)}{español (nativo), inglés (avanzado)}}
+    }}
+ \resumeCompactListEnd
+
+\end{document}

@@ -1,0 +1,63 @@
+# Builds both resumes on every push and pull request, checks that each fits on one
+# page, and on main publishes the PDFs to the rolling "latest" release, so
+# these links always point at the current version:
+#   https://github.com/<owner>/<repo>/releases/download/latest/Vicente_Calisto_Resume_EN.pdf
+#   https://github.com/<owner>/<repo>/releases/download/latest/Vicente_Calisto_Resume_ES.pdf
+name: Build resume
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write # to move the "latest" tag and upload release assets
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile (pdfLaTeX, TeX Live)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: src # src/.latexmkrc sends the output to build/
+          root_file: |
+            Vicente_Calisto_Resume_EN.tex
+            Vicente_Calisto_Resume_ES.tex
+
+      - name: Check that each resume is one page
+        run: |
+          for log in build/Vicente_Calisto_Resume_EN.log build/Vicente_Calisto_Resume_ES.log; do
+            if ! grep -q 'Output written on .*(1 page' "$log"; then
+              echo "::error file=src/resume.tex::${log%.log}.pdf is longer than one page"
+              exit 1
+            fi
+          done
+
+      - name: Upload PDFs as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: build/Vicente_Calisto_Resume_*.pdf
+
+      - name: Publish to the "latest" release
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="Built automatically from ${GITHUB_SHA::7} on $(date -u +%Y-%m-%d)."
+          git tag -f latest
+          git push -f origin refs/tags/latest
+          if gh release view latest > /dev/null 2>&1; then
+            gh release edit latest --notes "$notes"
+          else
+            gh release create latest --title "Latest resume" --notes "$notes" --latest
+          fi
+          gh release upload latest build/Vicente_Calisto_Resume_EN.pdf build/Vicente_Calisto_Resume_ES.pdf --clobber

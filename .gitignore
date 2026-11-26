@@ -1,0 +1,20 @@
+# Build output (make, CI and LaTeX Workshop all write to build/)
+build/
+
+# Stray LaTeX output, if something compiles in place
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.toc
+
+# PDFs are built by CI and published as release assets, not committed
+*.pdf
+
+# Editor / local tool settings
+.claude/settings.local.json
+.DS_Store

@@ -1,0 +1,4 @@
+{
+  // LaTeX Workshop: build into build/ instead of next to the sources
+  "latex-workshop.latex.outDir": "%DIR%/../build"
+}
