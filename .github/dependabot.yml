@@ -1,7 +1,11 @@
-# Keeps the GitHub Actions used by the build up to date.
+# Keeps the GitHub Actions used by the build up to date: once a month, all
+# available updates arrive together in a single pull request.
 version: 2
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    groups:
+      github-actions:
+        patterns: ["*"]
